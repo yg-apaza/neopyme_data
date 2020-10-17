@@ -1,1 +1,1 @@
-worker: python main.py
+web: gunicorn --bind 127.0.0.1:8000 --workers=1 --threads=15 application[ec2-user@ip-172-31-19-219 current]
