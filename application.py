@@ -34,25 +34,6 @@ welcome = """
 </html>
 """
 
-def application(environ, start_response):
-  path = environ['PATH_INFO']
-  method = environ['REQUEST_METHOD']
-  if method == 'POST':
-    try:
-      if path == '/':
-        request_body_size = int(environ['CONTENT_LENGTH'])
-        request_body = environ['wsgi.input'].read(request_body_size)
-        logger.info("Received message: %s" % request_body)
-    except (TypeError, ValueError):
-      logger.warning('Error retrieving request body for async work.')
-    response = ''
-  else:
-      response = welcome
-  start_response("200 OK", [
-    ("Content-Type", "text/html"),
-    ("Content-Length", str(len(response)))
-  ])
-  return [bytes(response, 'utf-8')]
 
 def crawl_ruc(ruc):
   if len(ruc) == 11:
@@ -78,3 +59,24 @@ def crawl_ruc(ruc):
       logger.error('[SUNAT] No hay informacion para el RUC {}'.format(ruc))
   else:
     logger.error('[SUNAT] RUC {} no tiene 11 digitos'.format(ruc))
+
+def application(environ, start_response):
+  path = environ['PATH_INFO']
+  method = environ['REQUEST_METHOD']
+  if method == 'POST':
+    try:
+      if path == '/':
+        request_body_size = int(environ['CONTENT_LENGTH'])
+        request_body = environ['wsgi.input'].read(request_body_size)
+        logger.info("Received message: %s" % request_body)
+        crawl_ruc(request_body)
+    except (TypeError, ValueError):
+      logger.warning('Error retrieving request body for async work.')
+    response = ''
+  else:
+      response = welcome
+  start_response("200 OK", [
+    ("Content-Type", "text/html"),
+    ("Content-Length", str(len(response)))
+  ])
+  return [bytes(response, 'utf-8')]
