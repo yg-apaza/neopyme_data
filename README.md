@@ -4,7 +4,7 @@
 - cleanerdata_.py: Se encarga del pre-procesamiento (limpieza y normalización) de datos obtenidos de fuentes internas bancarizada.
 - Archivos *.csv: Resultados de archivos obtenidos por cada paso en la etapa de pre-procesamiento
 - PGMult.py: Se enarga de encontrar la función que relaciona todos los datos de entrada, lo cual seria complicado de hacer con la clasica regresión matemática
-- Evaluate.py: Se encarga la información de manera tradicional
+- Evaluate.py: Se encarga de evaluar la información de manera tradicional
 
 # Transformación de datos en NEOPYME
 - 1. dbUniversoRankingSunatAfilDigitalRccSunarp : Archivo que une toda la informacion
