@@ -52,9 +52,12 @@ class Evaluate:
 
         # activity_start_date
         safe = safe + (activity_start_date - 1920)/100
-
+        safe = safe + ((admission_date - 1920)/100)0.1
+        
         #company_size_desc
         safe = safe + company_size_desc/10
+
+        safe = safe + (Personal_Type)0.1
 
         if ranking_number > 100:
             safe = safe+0.1
@@ -87,6 +90,6 @@ class Evaluate:
         if pbi_sector_per > 100:
             safe = safe+0.5
         
-        if safe > 90 :
+        if safe > 70 :
             return 1
         else: return 0
