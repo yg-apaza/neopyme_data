@@ -43,7 +43,7 @@ def crawl_ruc(ruc):
         postgres_select_query = """select * from info_sources_entityinformation where ruc = %s and source = %s"""
         cursor.execute(postgres_select_query, (ruc, "1"))
         records = cursor.fetchone()
-        if len(records) > 0:
+        if records:
           id = records[0]
           postgres_update_query = """update info_sources_entityinformation set data = %s where id = %s"""
           cursor.execute(postgres_update_query, (r.text, id))
