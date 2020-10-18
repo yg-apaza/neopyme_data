@@ -1,0 +1,6 @@
+gender_type	|  Almost all null/irrelevant
+birth_date	|  Almost all null/irrelevant
+marital_status_type|  Almost all null/irrelevant
+ciiu_spanish_desc | same data in spanish_sector_company_name, and the second it's better
+income_monthly_amount|  Almost all null/irrelevant
+foreign_company_mark_type | Almost all null/irrelevant
