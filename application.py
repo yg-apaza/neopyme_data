@@ -69,7 +69,7 @@ def application(environ, start_response):
         request_body_size = int(environ['CONTENT_LENGTH'])
         request_body = environ['wsgi.input'].read(request_body_size)
         logger.info("Received message: %s" % request_body)
-        crawl_ruc(request_body)
+        crawl_ruc(request_body.decode("utf-8"))
     except (TypeError, ValueError):
       logger.warning('Error retrieving request body for async work.')
     response = ''
