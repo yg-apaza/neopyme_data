@@ -1,0 +1,15 @@
+Pequeña/Empresa : 0
+Mediana/Empresa : 1
+Gran/ Empresa 2
+
+Segmento:
+Negocio: 0
+PNN: 1
+
+Personal_Type: 
+R:0
+L:1
+
+Public_private:
+Privada: 0
+Public:1
