@@ -1,22 +1,23 @@
 import logging.handlers
+import requests
+import psycopg2
 
-# Create logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
-# Handler 
 LOG_FILE = '/tmp/sample-app.log'
 handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1048576, backupCount=5)
 handler.setLevel(logging.INFO)
-
-# Formatter
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# Add Formatter to Handler
 handler.setFormatter(formatter)
-
-# add Handler to Logger
 logger.addHandler(handler)
+
+connection = psycopg2.connect(
+    database="ebdb",
+    user="master",
+    password="motita$123",
+    host="aa7ymq7ssa88pk.cacq4m9m1pye.us-east-1.rds.amazonaws.com",
+    port='5432'
+)
 
 welcome = """
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -127,26 +128,37 @@ welcome = """
 </html>
 """
 
-
 def application(environ, start_response):
-    path = environ['PATH_INFO']
-    method = environ['REQUEST_METHOD']
-    if method == 'POST':
-        try:
-            if path == '/':
-                request_body_size = int(environ['CONTENT_LENGTH'])
-                request_body = environ['wsgi.input'].read(request_body_size)
-                logger.info("Received message: %s" % request_body)
-            elif path == '/scheduled':
-                logger.info("Received task %s scheduled at %s", environ['HTTP_X_AWS_SQSD_TASKNAME'],
-                            environ['HTTP_X_AWS_SQSD_SCHEDULED_AT'])
-        except (TypeError, ValueError):
-            logger.warning('Error retrieving request body for async work.')
-        response = ''
+  path = environ['PATH_INFO']
+  method = environ['REQUEST_METHOD']
+  if method == 'POST':
+    try:
+      if path == '/':
+        request_body_size = int(environ['CONTENT_LENGTH'])
+        request_body = environ['wsgi.input'].read(request_body_size)
+        logger.info("Received message: %s" % request_body)
+    except (TypeError, ValueError):
+      logger.warning('Error retrieving request body for async work.')
+    response = ''
+  else:
+      response = welcome
+  start_response("200 OK", [
+    ("Content-Type", "text/html"),
+    ("Content-Length", str(len(response)))
+  ])
+  return [bytes(response, 'utf-8')]
+
+def crawl_ruc(ruc):
+  if len(ruc) == 11:
+    r = requests.get('https://api.sunat.cloud/ruc/' + ruc)
+    if r.status_code == 200 and len(r.text) > 0:
+      cursor = connection.cursor()
+      postgres_insert_query = """ INSERT INTO info_sources_entityinformation (ruc, data, link, source) VALUES (%s,%s,%s,%s)"""
+      record_to_insert = (ruc, r.text, "","1")
+      cursor.execute(postgres_insert_query, record_to_insert)
+
+      connection.commit()
     else:
-        response = welcome
-    start_response("200 OK", [
-        ("Content-Type", "text/html"),
-        ("Content-Length", str(len(response)))
-    ])
-    return [bytes(response, 'utf-8')]
+      logger.error('No hay informacion para el RUC {}'.format(ruc))
+  else:
+    logger.error('RUC {} no tiene 11 digitos'.format(ruc))
