@@ -6,7 +6,7 @@
 - PGMult.py: Se enarga de encontrar la función que relaciona todos los datos de entrada, lo cual seria complicado de hacer con la clasica regresión matemática
 - Evaluate.py: Se encarga la información de manera tradicional
 
-# Manejo de datos en NEOPYME
+# Transformación de datos en NEOPYME
 - 1. dbUniversoRankingSunatAfilDigitalRccSunarp : Archivo que une todos los archvos
 - 2. dbUniversoRankingSunatAfilDigitalRccSunarp_clean irrelevant : Se eliminan columnas despreciables:
 - 3. dbUniversoRankingSunatAfilDigitalRccSunarp_clean repetitive : Se elimina la información que es repetitiva en toda la información
