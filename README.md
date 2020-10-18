@@ -7,7 +7,7 @@
 - Evaluate.py: Se encarga la información de manera tradicional
 
 # Transformación de datos en NEOPYME
-- 1. dbUniversoRankingSunatAfilDigitalRccSunarp : Archivo que une todos los archvos
+- 1. dbUniversoRankingSunatAfilDigitalRccSunarp : Archivo que une toda la informacion
 - 2. dbUniversoRankingSunatAfilDigitalRccSunarp_clean irrelevant : Se eliminan columnas despreciables:
 - 3. dbUniversoRankingSunatAfilDigitalRccSunarp_clean repetitive : Se elimina la información que es repetitiva en toda la información
 - 4. dbUniversoRankingSunatAfilDigitalRccSunarp_average: Comprime los datos periodicos, mediante el average
