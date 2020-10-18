@@ -51,7 +51,7 @@ class Evaluate:
         safe = safe + branches_number/100
 
         # activity_start_date
-        safe = safe + (1990-activity_start_date)/100
+        safe = safe + (activity_start_date - 1920)/100
 
         #company_size_desc
         safe = safe + company_size_desc/10
