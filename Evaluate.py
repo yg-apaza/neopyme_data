@@ -54,37 +54,37 @@ class Evaluate:
         safe = safe + (1990-activity_start_date)/100
 
         #company_size_desc
-        safe = safe + company_size_desc/100
+        safe = safe + company_size_desc/10
 
-        if ranking_number > 0:
+        if ranking_number > 100:
             safe = safe+0.1
-        if min_usd_billing_amount > 0:
+        if min_usd_billing_amount > 100:
             safe = safe+0.1
-        if max_usd_billing_amount > 0:
+        if max_usd_billing_amount > 100:
             safe = safe+0.1
-        if min_pen_billing_amount > 0:
+        if min_pen_billing_amount > 100:
             safe = safe+0.1
-        if max_pen_billing_amount > 0:
+        if max_pen_billing_amount > 100:
             safe = safe+0.1
-        if income_amount > 0:
+        if income_amount > 100:
             safe = safe+0.1
-        if net_profit_amount > 0:
+        if net_profit_amount > 100:
             safe = safe+0.1
-        if assets_amount > 0:
+        if assets_amount > 100:
             safe = safe+0.1
-        if equity_amount > 0:
+        if equity_amount > 100:
             safe = safe+0.1
-        if liabilities_amount > 0:
+        if liabilities_amount > 100:
             safe = safe+0.1
         if usd_export > 0:
             safe = safe+0.1
-        if usd_import_amount > 0:
+        if usd_import_amount > 100:
             safe = safe+0.1
-        if state_sales_amount > 0:
+        if state_sales_amount > 100:
             safe = safe+0.1
-        if roe_per > 0:
+        if roe_per > 100:
             safe = safe+0.1
-        if pbi_sector_per > 0:
+        if pbi_sector_per > 100:
             safe = safe+0.5
         
         if safe > 90 :
