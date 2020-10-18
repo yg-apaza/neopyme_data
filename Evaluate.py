@@ -57,7 +57,7 @@ class Evaluate:
         #company_size_desc
         safe = safe + company_size_desc/10
 
-        safe = safe + (Personal_Type)0.1
+        safe = safe + (persona1_type_x)0.1
 
         if ranking_number > 100:
             safe = safe+0.1
@@ -85,7 +85,7 @@ class Evaluate:
             safe = safe+0.1
         if state_sales_amount > 100:
             safe = safe+0.1
-        if roe_per > 100:
+        if roe_per > 1000:
             safe = safe+0.1
         if pbi_sector_per > 100:
             safe = safe+0.5
